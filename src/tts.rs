@@ -3,13 +3,6 @@ use std::ffi::CString;
 
 enum CSTVoice {}
 
-#[link(name="flite")]
-extern {
-    fn flite_init();
-    fn flite_text_to_speech(text: *const c_char, voice: *mut CSTVoice,
-                            outtype: *const c_char) -> f32;
-}
-
 #[link(name="flite_cmu_us_slt")]
 extern {
     fn register_cmu_us_slt(voxdir: *const c_char) -> *mut CSTVoice;
@@ -19,6 +12,16 @@ extern {
 extern {}
 
 #[link(name="flite_cmulex")]
+extern {}
+
+#[link(name="flite")]
+extern {
+    fn flite_init();
+    fn flite_text_to_speech(text: *const c_char, voice: *mut CSTVoice,
+                            outtype: *const c_char) -> f32;
+}
+
+#[link(name="asound")]
 extern {}
 
 pub fn init() {

@@ -1,6 +1,60 @@
 mod tts;
+mod portfire;
 
 fn main() {
     tts::init();
-    tts::say("This is a test of the emergency broadcast system");
+
+    tts::say("Discovering portfires");
+    let mut boards = portfire::autodiscover().unwrap();
+
+    match boards.len() {
+        0 => { tts::say("No boards found"); return; },
+        1 => tts::say("One board found"),
+        i => tts::say(&format!("{} boards found", i)),
+    }
+
+    let board = boards.pop().unwrap();
+
+    tts::say("Pinging");
+    match board.ping() {
+        Ok(_) => tts::say("OK"),
+        Err(_) => tts::say("Error"),
+    }
+
+    tts::say("Checking bus voltage");
+    match board.bus_voltage() {
+        Ok(v) => tts::say(&format!("{:.0} volt", v)),
+        Err(_) => tts::say("Error"),
+    }
+
+    tts::say("Checking continuities");
+    let conts = board.continuities().unwrap();
+    let channels: Vec<String> = conts.iter()
+                                    .enumerate()
+                                    .filter(|&(_, cont)| *cont != 255)
+                                    .map(|(idx, _)| (idx+1).to_string())
+                                    .collect();
+    if channels.len() == 0 {
+        tts::say("No channels connected");
+    } else {
+        tts::say(&format!("channels {} connected", channels.join(",")));
+    }
+
+    tts::say("Arming");
+    match board.arm() {
+        Ok(_) => tts::say("OK"),
+        Err(_) => tts::say("Error"),
+    }
+
+    tts::say("Checking bus voltage");
+    match board.bus_voltage() {
+        Ok(v) => tts::say(&format!("{:.0} volt", v)),
+        Err(_) => tts::say("Error"),
+    }
+
+    tts::say("Disarming");
+    match board.disarm() {
+        Ok(_) => tts::say("OK"),
+        Err(_) => tts::say("Error"),
+    }
 }
