@@ -1,0 +1,12 @@
+# Testing Script
+print Initialising...
+say IRIS Initialising
+sleep 5
+say Initiating firing sequence
+fire 001 1,2,3
+fire 002 1,2,3
+fire 003 1,2,3
+sleep 5
+fire 001 4,5,6
+say All Done
+pause

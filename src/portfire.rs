@@ -99,8 +99,8 @@ impl Board {
         Ok((((buf[0] as u16) | ((buf[1] as u16)<<8)) as f32)/1000.0)
     }
 
-    pub fn continuities(&self) -> io::Result<[u8; 30]> {
-        let mut buf = [0u8; 30];
+    pub fn continuities(&self) -> io::Result<[u8; 31]> {
+        let mut buf = [0u8; 31];
         let cmd = ['c' as u8];
         self.txrx(&cmd, &mut buf)?;
         Ok(buf)
