@@ -1,34 +1,46 @@
 extern crate iris;
-use iris::{tts,portfire};
+
+use iris::portfire;
+
+#[cfg(feature="tts")]
+use iris::tts;
+
+fn say(message: &str) {
+    #[cfg(feature="tts")]
+    tts::say(message);
+    #[cfg(not(feature="tts"))]
+    println!("SAYING: {}", message);
+}
 
 fn main() {
 
+    #[cfg(feature="tts")]
     tts::init();
 
-    tts::say("Discovering portfires");
+    say("Discovering portfires");
     let boards = portfire::autodiscover().unwrap();
 
     match boards.len() {
-        0 => { tts::say("No boards found"); return; },
-        1 => tts::say("One board found"),
-        i => tts::say(&format!("{} boards found", i)),
+        0 => { say("No boards found"); return; },
+        1 => say("One board found"),
+        i => say(&format!("{} boards found", i)),
     }
 
     for board in boards {
 
-        tts::say("Pinging");
+        say("Pinging");
         match board.ping() {
-            Ok(_) => tts::say("OK"),
-            Err(_) => tts::say("Error"),
+            Ok(_) => say("OK"),
+            Err(_) => say("Error"),
         }
 
-        tts::say("Checking bus voltage");
+        say("Checking bus voltage");
         match board.bus_voltage() {
-            Ok(v) => tts::say(&format!("{:.0} volt", v)),
-            Err(_) => tts::say("Error"),
+            Ok(v) => say(&format!("{:.0} volt", v)),
+            Err(_) => say("Error"),
         }
 
-        tts::say("Checking continuities");
+        say("Checking continuities");
         let conts = board.continuities().unwrap();
         let channels: Vec<String> = conts.iter()
                                         .enumerate()
@@ -36,27 +48,27 @@ fn main() {
                                         .map(|(idx, _)| (idx+1).to_string())
                                         .collect();
         if channels.len() == 1 {
-            tts::say("No channels connected");
+            say("No channels connected");
         } else {
-            tts::say(&format!("channels {} connected", channels.join(",")));
+            say(&format!("channels {} connected", channels.join(",")));
         }
 
-        tts::say("Arming");
+        say("Arming");
         match board.arm() {
-            Ok(_) => tts::say("OK"),
-            Err(_) => tts::say("Error"),
+            Ok(_) => say("OK"),
+            Err(_) => say("Error"),
         }
 
-        tts::say("Checking bus voltage");
+        say("Checking bus voltage");
         match board.bus_voltage() {
-            Ok(v) => tts::say(&format!("{:.0} volt", v)),
-            Err(_) => tts::say("Error"),
+            Ok(v) => say(&format!("{:.0} volt", v)),
+            Err(_) => say("Error"),
         }
 
-        tts::say("Disarming");
+        say("Disarming");
         match board.disarm() {
-            Ok(_) => tts::say("OK"),
-            Err(_) => tts::say("Error"),
+            Ok(_) => say("OK"),
+            Err(_) => say("Error"),
         }
     }
 }
