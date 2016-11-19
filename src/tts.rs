@@ -27,12 +27,12 @@ extern {
 extern {}
 
 pub struct TTS {
-    tx: mpsc::Sender<String>,
+    tx: mpsc::SyncSender<String>,
 }
 
 impl TTS {
     pub fn new() -> TTS {
-        let (tx, rx) = mpsc::channel::<String>();
+        let (tx, rx) = mpsc::sync_channel::<String>(0);
 
         thread::spawn(move || {
             let voxdir = CString::new("").unwrap();

@@ -71,11 +71,11 @@ impl Cue {
                 // is the message to say.
                 "say" => {
                     if args.len() < 2 {
-                        return ScriptError::parse_err_numargs(lineno);
+                        Ok(Some(Cue::Say { message: "".to_string() } ))
+                    } else {
+                        let (_, message) = line.split_at(4);
+                        Ok(Some(Cue::Say{ message: String::from(message) }))
                     }
-
-                    let (_, message) = line.split_at(4);
-                    Ok(Some(Cue::Say{ message: String::from(message) }))
                 },
 
                 // Parse a "print" command. Like a "say" command, the rest of
@@ -576,6 +576,7 @@ mod tests {
         print\n\
         print Hello\n\
         say Hello\n\
+        say\n\
         pause\n\
         sleep 1\n\
         fire ch1 chA chB chC\n\
@@ -600,6 +601,7 @@ mod tests {
             Cue::Print { message: "".to_string() },
             Cue::Print { message: "Hello".to_string() },
             Cue::Say { message: "Hello".to_string() },
+            Cue::Say { message: "".to_string() },
             Cue::Pause,
             Cue::Sleep { time: 1 },
             Cue::Fire { channels: vec!["ch1".to_string(), "chA".to_string(),
