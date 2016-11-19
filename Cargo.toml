@@ -8,3 +8,4 @@ default = ["tts"]
 tts = []
 
 [dependencies]
+clap = "2"

@@ -82,11 +82,11 @@ impl Cue {
                 // the line is the message to print.
                 "print" => {
                     if args.len() < 2 {
-                        return ScriptError::parse_err_numargs(lineno);
+                        Ok(Some(Cue::Print { message: "".to_string() }))
+                    } else {
+                        let (_, message) = line.split_at(6);
+                        Ok(Some(Cue::Print{ message: String::from(message) }))
                     }
-
-                    let (_, message) = line.split_at(6);
-                    Ok(Some(Cue::Print{ message: String::from(message) }))
                 },
 
                 // Parse a "sleep" command. The single argument must be an
@@ -573,6 +573,7 @@ mod tests {
         channel chA 002 1\n\
         channel chB 002 2\n\
         channel chC 002 3\n\
+        print\n\
         print Hello\n\
         say Hello\n\
         pause\n\
@@ -596,6 +597,7 @@ mod tests {
             Cue::Channel { name: "chA".to_string(), board_id: "002".to_string(), num: 1 },
             Cue::Channel { name: "chB".to_string(), board_id: "002".to_string(), num: 2 },
             Cue::Channel { name: "chC".to_string(), board_id: "002".to_string(), num: 3 },
+            Cue::Print { message: "".to_string() },
             Cue::Print { message: "Hello".to_string() },
             Cue::Say { message: "Hello".to_string() },
             Cue::Pause,

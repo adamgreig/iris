@@ -91,6 +91,16 @@ impl Board {
         self.txrx_ok(&cmd)
     }
 
+    pub fn fire_retry(&self, channels: [u8; 3]) {
+        while let Err(_) = self.arm() {
+            println!("ERROR: Retrying arming command to board {}", self.ip);
+        }
+        while let Err(_) = self.fire(channels) {
+            println!("ERROR: Retrying firing command to board {}", self.ip);
+            while let Err(_) = self.arm() {}
+        }
+    }
+
     pub fn bus_voltage(&self) -> io::Result<f32> {
         let mut buf = [0u8; 2];
         let cmd = ['b' as u8];

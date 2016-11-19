@@ -1,4 +1,3 @@
-use std::env;
 use std::collections::HashMap;
 use std::thread;
 use std::time::Duration;
@@ -8,18 +7,27 @@ extern crate iris;
 use iris::portfire;
 use iris::script::{self, Cue};
 
+extern crate clap;
+use clap::App;
+
 #[cfg(feature="tts")]
 use iris::tts::TTS;
 
 fn main() {
-    let args: Vec<_> = env::args().collect();
-    if args.len() != 2 {
-        println!("Usage: {} <script file>", args[0]);
-        return;
-    }
+    let args = App::new("IRIS")
+                    .args_from_usage("
+                        --dry-run       'Don't really fire, just print the fire actions'
+                        --skip-checks   'Skip all board related checks'
+                        <script>        'Path to script file'
+                    ")
+                    .get_matches();
+
+    let scriptpath = args.value_of("script").unwrap();
+    let dryrun = args.is_present("dry-run");
+    let skipchecks = args.is_present("skip-checks");
 
     // Read script
-    let script = script::Script::from_file(&args[1]).unwrap();
+    let script = script::Script::from_file(&scriptpath).unwrap();
 
     // Find Portfires and map to script
     let mut discovered_portfires = portfire::autodiscover().unwrap();
@@ -32,7 +40,7 @@ fn main() {
                 board_found = true;
             }
         }
-        if !board_found {
+        if !board_found && !skipchecks {
             println!("Didn't find board {} {:2X}:{:2X}:{:2X}:{:2X}:{:2X}:{:2X}",
                      board_id, mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
             return;
@@ -97,7 +105,7 @@ fn main() {
     }
 
     // Quit early if anything went wrong in setup
-    if got_error {
+    if got_error && !skipchecks {
         println!("An error occurred, disarming and quitting.");
         for board in portfires.values() {
             board.disarm().unwrap();
@@ -148,8 +156,12 @@ fn main() {
                     for (idx, chan) in chans.iter().enumerate() {
                         firing_chans[idx] = *chan;
                     }
-                    let portfire = &portfires[&board_id.to_string()];
-                    portfire.fire(firing_chans).unwrap();
+                    if !dryrun {
+                        let portfire = &portfires[&board_id.to_string()];
+                        portfire.fire_retry(firing_chans);
+                    } else {
+                        println!("FIRING Board {} Channels {:?}", board_id, firing_chans);
+                    }
                 }
             },
 
@@ -157,12 +169,12 @@ fn main() {
         }
     }
 
-    // Show over, disarm
-    for board in portfires.values() {
-        board.disarm().unwrap();
-    }
-
     // Wait for final user input before quitting, in case of pending TTS
     let mut l = String::new();
     let _ = io::stdin().read_line(&mut l);
+
+    // Show over, disarm
+    for board in portfires.values() {
+        let _ = board.disarm();
+    }
 }
