@@ -2,9 +2,101 @@
 say I R I S Initializing
 print IRIS Initialising...
 
-board 001 d8:80:39:e0:7d:37
-board 002 d8:80:39:e0:81:a8
-board 003 d8:80:39:e0:7c:8c
+board 1 d8:80:39:e0:7d:37
+board 2 d8:80:39:e0:81:a8
+board 3 d8:80:39:e0:7c:8c
+
+channel sparklers               1 1
+channel shot1                   2 5
+channel shot2                   2 6
+channel lapis_lazuli1           1 2
+channel lapis_lazuli2           1 3
+channel whoosh                  2 7
+channel astrolite               1 4
+channel golden_oriole           1 5
+channel thunder_storm           1 6
+channel galactic                1 7
+channel dazzler                 1 8
+channel orbit_boom1             1 9
+channel orbit_boom2             1 10
+channel uranus_moons            2 8
+channel poison_ivy1             1 11
+channel poison_ivy2             1 12
+channel hi_5                    1 13
+channel 5_star                  1 14
+channel neptunes_creatures      1 15
+channel jellybeans              1 19
+channel destiny                 1 20
+channel luminous_flux           2 9
+channel green_flare             1 21
+channel scarlet_ray             1 22
+channel fusion                  1 23
+channel argon                   1 24
+channel luna                    1 25
+channel sonar                   1 26
+channel silver_rain             1 27
+channel mystic_pearls           2 10
+channel fire_and_ice            2 11
+channel asteroid                1 16
+channel meteorite               1 17
+channel bar_humbug              1 18
+channel green_envy              2 1
+channel citrine                 1 28
+channel yellow_pearl            1 29
+channel calypso                 1 30
+channel mythos                  2 4
+channel midnight_methyst        2 3
+channel go_stop_go              2 2
+channel delta_ray               2 12
+channel beijing_blitz           2 13
+channel angry_ants              2 14
+channel flash_harry             2 15
+channel magneto_burst           2 16
+channel shooting_stars          2 17
+channel starlight1              3 1
+channel starlight2              3 2
+channel ruby_duby_do            3 3
+channel scarey_spiders          3 4
+channel lava_flow               3 5
+channel shot3                   3 6
+channel shot4                   3 7
+channel shot5                   3 8
+channel shot6                   3 9
+channel shot7                   3 10
+channel shot8                   3 11
+channel shot9                   3 12
+channel shot10                  3 13
+channel shot11                  3 14
+channel shot12                  3 15
+channel shot13                  2 18
+channel shot14                  3 16
+channel shot15                  3 17
+channel shot16                  3 18
+channel shot17                  2 19
+channel shot18                  2 20
+channel shot19                  2 21
+channel shot20                  3 19
+channel shot21                  3 20
+channel shot22                  3 21
+channel shot23                  2 22
+channel shot24                  2 23
+channel shot25                  2 24
+channel shot26                  3 22
+channel shot27                  3 23
+channel shot28                  3 24
+channel shot29                  2 25
+channel shot30                  2 26
+channel shot31                  2 27
+channel shot32                  3 25
+channel shot33                  3 26
+channel shot34                  3 27
+channel shot35                  2 28
+channel shot36                  2 29
+channel shot37                  2 30
+channel shot38                  3 28
+channel shot39                  3 29
+channel shot40                  3 30
+
 
 print Press any key to continue
 pause
@@ -44,12 +136,10 @@ sleep 30
 fire hi_5 5_star
 sleep 30
 
-# RCs
+# wheel and 4 RCs together
 fire destiny
 sleep 10
-fire grasshoppers1 neptunes_creatures1
-sleep 1
-fire grasshoppers2 neptunes_creatures2
+fire neptunes_creatures
 sleep 30
 
 fire jellybeans
@@ -76,7 +166,7 @@ say Beginning firing sequence gamma
 fire luna sonar silver_rain
 sleep 5
 
-fire mystic_pearls1 mystic_pearls2
+fire mystic_pearls
 sleep 20
 
 fire asteroid meteorite
@@ -106,7 +196,7 @@ sleep 30
 
 say Firing sequence delta complete
 sleep 2
-Say Beginning final sequence
+say Beginning final sequence
 
 fire beijing_blitz
 sleep 20
