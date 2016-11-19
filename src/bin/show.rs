@@ -98,7 +98,7 @@ fn main() {
         // Check the boards arm and the bus voltage comes up
         board.arm().unwrap();
         let v = board.bus_voltage().unwrap();
-        if v < 3.0 {
+        if v < 2.5 {
             println!("Board {} arm voltage {}, ERROR", board_id, v);
             got_error = true;
         }

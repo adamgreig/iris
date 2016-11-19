@@ -100,7 +100,7 @@ fn main() {
         board.arm().unwrap();
         let v = board.bus_voltage().unwrap();
         print!("Arm voltage {:.<18.2}", v);
-        if v > 3.0 {
+        if v > 2.5 {
             println!("OK");
         } else {
             println!("ERROR");
