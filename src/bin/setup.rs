@@ -16,6 +16,7 @@ fn main() {
     println!("    {} boards", script.boards.len());
     println!("    {} channels", script.channels.len());
     println!("    {} cues", script.cues.len());
+    println!("    {}s duration", script.duration);
 
     println!("Autodiscovering portfires...");
     let mut discovered_portfires = portfire::autodiscover().unwrap();
