@@ -1,0 +1,155 @@
+# IRIS script for fireworks 2016-11-19
+say I R I S Initializing
+print IRIS Initialising...
+
+board 001 d8:80:39:e0:7d:37
+board 002 d8:80:39:e0:81:a8
+board 003 d8:80:39:e0:7c:8c
+
+print Press any key to continue
+pause
+say Beginning firing sequence alpha
+
+# Begin with sparklers and two shot tubes:
+fire sparklers
+sleep 4
+fire shot1 shot2
+sleep 3
+
+# smallish fountains, finishing with mine
+fire lapis_lazuli1 lapis_lazuli2
+sleep 15
+fire whoosh
+sleep 3
+
+# Smallish fountains with smallish RCs
+fire astrolite golden_oriole
+sleep 1
+fire thunder_storm galactic
+sleep 20
+
+say Firing sequence alpha complete
+pause
+say Beginning firing sequence beta
+
+# Small fountain trident, small kimby battery
+fire dazzler orbit_boom1 orbit_boom2
+sleep 5
+fire uranus_moons
+sleep 15
+
+# Fountain batteries
+fire poison_ivy1 poison_ivy2
+sleep 30
+fire hi_5 5_star
+sleep 30
+
+# RCs
+fire destiny
+sleep 10
+fire grasshoppers1 neptunes_creatures1
+sleep 1
+fire grasshoppers2 neptunes_creatures2
+sleep 30
+
+fire jellybeans
+sleep 45
+
+# Potpurri of rubbish fountains:
+fire green_flare
+sleep 5
+fire scarlet_ray
+sleep 5
+fire fusion
+sleep 5
+fire argon
+sleep 5
+
+fire luminous_flux
+sleep 30
+
+say Firing sequence beta complete
+pause
+say Beginning firing sequence gamma
+
+# Rubbish fountains
+fire luna sonar silver_rain
+sleep 5
+
+fire mystic_pearls1 mystic_pearls2
+sleep 20
+
+fire asteroid meteorite
+sleep 30
+fire bar_humbug green_envy citrine
+sleep 20
+
+fire yellow_pearl
+sleep 20
+
+say Firing sequence gamma complete
+pause
+say Beginning firing sequence delta
+
+fire go_stop_go calypso
+sleep 20
+
+fire mythos
+sleep 40
+
+fire fire_and_ice midnight_methyst
+sleep 15
+
+say Deploying delta ray
+fire delta_ray
+sleep 30
+
+say Firing sequence delta complete
+sleep 2
+Say Beginning final sequence
+
+fire beijing_blitz
+sleep 20
+fire angry_ants
+sleep 25
+
+fire flash_harry
+sleep 20
+fire magneto_burst
+sleep 25
+
+fire shooting_stars
+sleep 35
+
+fire starlight1 starlight2
+sleep 35
+
+fire ruby_duby_do scarey_spiders
+sleep 30
+
+fire lava_flow
+sleep 3
+fire shot3
+sleep 1
+fire shot4
+sleep 1
+fire shot5
+sleep 1
+fire shot6 shot7
+sleep 1
+fire shot8 shot9
+sleep 1
+fire shot10 shot11 shot12
+sleep 1
+fire shot13 shot14 shot15 shot16
+sleep 1
+fire shot17 shot18 shot19 shot20 shot21 shot22
+sleep 1
+fire shot23 shot24 shot25 shot26 shot27 shot28
+sleep 1
+fire shot29 shot30 shot31 shot32 shot33 shot34
+sleep 1
+fire shot35 shot36 shot37 shot38 shot39 shot40
+
+sleep 10
+say Sequence complete
