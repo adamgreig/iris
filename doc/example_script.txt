@@ -1,0 +1,15 @@
+# Example IRIS script
+say I R I S Initializing
+print IRIS Initialising...
+
+board 001 d8:80:39:e0:7d:37
+board 002 d8:80:39:e0:81:a8
+board 003 d8:80:39:e0:7c:8c
+channel ch1 001 1
+channel ch2 001 2
+
+print Press any key to continue
+pause
+
+say Firing all channels
+fire ch1 ch2

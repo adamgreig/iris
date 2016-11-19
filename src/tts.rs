@@ -1,5 +1,7 @@
 use std::os::raw::c_char;
 use std::ffi::CString;
+use std::thread;
+use std::sync::mpsc;
 
 enum CSTVoice {}
 
@@ -24,10 +26,43 @@ extern {
 #[link(name="asound")]
 extern {}
 
-pub fn init() {
-    unsafe {
-        flite_init();
+pub struct TTS {
+    tx: mpsc::Sender<String>,
+}
+
+impl TTS {
+    pub fn new() -> TTS {
+        let (tx, rx) = mpsc::channel::<String>();
+
+        thread::spawn(move || {
+            let voxdir = CString::new("").unwrap();
+            let play = CString::new("play").unwrap();
+            let v: *mut CSTVoice;
+
+            unsafe {
+                flite_init();
+                v = register_cmu_us_slt(voxdir.as_ptr());
+            }
+
+            loop {
+                for message in rx.recv() {
+                    let t = CString::new(message).unwrap();
+                    unsafe {
+                        flite_text_to_speech(t.as_ptr(), v, play.as_ptr());
+                    }
+                }
+            }
+        });
+
+        TTS { tx: tx }
     }
+
+    pub fn say(&self, text: &str) {
+        let _ = self.tx.send(text.to_string());
+    }
+}
+
+pub fn init() {
 }
 
 pub fn say(text: &str) {

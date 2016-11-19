@@ -46,7 +46,7 @@ pub enum Cue {
     Fire { channels: Vec<String> },
     Say { message: String },
     Print { message: String },
-    Sleep { time: i32 },
+    Sleep { time: u64 },
     Pause,
 }
 
@@ -55,7 +55,7 @@ pub struct Script {
     pub cues: Vec<Cue>,
     pub boards: HashMap<String, [u8; 6]>,
     pub channels: HashMap<String, (String, u8)>,
-    pub duration: i32,
+    pub duration: u64,
 }
 
 impl Cue {

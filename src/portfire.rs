@@ -5,11 +5,10 @@ use std::fmt;
 use std::net::{Ipv4Addr, TcpStream, UdpSocket};
 use std::time::{Instant, Duration};
 
-#[derive(Debug,PartialEq)]
+#[derive(Debug,PartialEq,Clone)]
 pub struct Board {
     pub ip: Ipv4Addr,
     pub mac: [u8; 6],
-    pub id: String,
 }
 
 pub fn autodiscover() -> io::Result<Vec<Board>> {
@@ -50,7 +49,7 @@ impl Board {
         let ip = Ipv4Addr::new(buf[8], buf[9], buf[10], buf[11]);
         let mac = [buf[12], buf[13], buf[14], buf[15], buf[16], buf[17]];
 
-        Some(Board { ip: ip, mac: mac, id: "".to_string() })
+        Some(Board { ip: ip, mac: mac })
     }
 
     fn txrx(&self, cmd: &[u8], buf: &mut [u8]) -> io::Result<usize> {
@@ -109,8 +108,8 @@ impl Board {
 
 impl fmt::Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "Board '{}' ({:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}) at {}",
-               self.id, self.mac[0], self.mac[1], self.mac[2], self.mac[3],
-               self.mac[4], self.mac[5], self.ip)
+        write!(f, "Board {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} at {}",
+               self.mac[0], self.mac[1], self.mac[2], self.mac[3], self.mac[4], self.mac[5],
+               self.ip)
     }
 }

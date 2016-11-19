@@ -1,6 +1,5 @@
-mod tts;
-mod portfire;
-mod script;
+extern crate iris;
+use iris::{tts,portfire};
 
 fn main() {
 
