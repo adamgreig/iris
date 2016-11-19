@@ -7,6 +7,8 @@ use std::io;
 extern crate iris;
 use iris::portfire;
 use iris::script::{self, Cue};
+
+#[cfg(feature="tts")]
 use iris::tts::TTS;
 
 fn main() {
@@ -104,6 +106,7 @@ fn main() {
     }
 
     // Start up the TTS engine
+    #[cfg(feature="tts")]
     let tts = TTS::new();
 
     // Run the show!
@@ -123,7 +126,10 @@ fn main() {
             },
 
             Cue::Say { message } => {
+                #[cfg(feature="tts")]
                 tts.say(&message);
+                #[cfg(not(feature="tts"))]
+                println!("SAYING: {}", message);
             },
 
             Cue::Fire { channels } => {
