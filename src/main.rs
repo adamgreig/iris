@@ -4,10 +4,6 @@ mod script;
 
 fn main() {
 
-    let s = script::Script::from_file("./script.txt").unwrap();
-    println!("{:?}", s);
-
-    /*
     tts::init();
 
     tts::say("Discovering portfires");
@@ -40,7 +36,7 @@ fn main() {
                                         .filter(|&(_, cont)| *cont != 255)
                                         .map(|(idx, _)| (idx+1).to_string())
                                         .collect();
-        if channels.len() == 0 {
+        if channels.len() == 1 {
             tts::say("No channels connected");
         } else {
             tts::say(&format!("channels {} connected", channels.join(",")));
@@ -64,6 +60,5 @@ fn main() {
             Err(_) => tts::say("Error"),
         }
     }
-    */
 }
 
