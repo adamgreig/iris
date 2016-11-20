@@ -18,6 +18,7 @@ fn main() {
                     .args_from_usage("
                         --dry-run       'Don't really fire, just print the fire actions'
                         --skip-checks   'Skip all board related checks'
+                        --skip-sleep    'Skip all sleep commands'
                         <script>        'Path to script file'
                     ")
                     .get_matches();
@@ -25,6 +26,7 @@ fn main() {
     let scriptpath = args.value_of("script").unwrap();
     let dryrun = args.is_present("dry-run");
     let skipchecks = args.is_present("skip-checks");
+    let skipsleep = args.is_present("skip-sleep");
 
     // Read script
     let script = script::Script::from_file(&scriptpath).unwrap();
@@ -121,7 +123,9 @@ fn main() {
     for cue in script.cues {
         match cue {
             Cue::Sleep { time } => {
-                thread::sleep(Duration::from_secs(time));
+                if !skipsleep {
+                    thread::sleep(Duration::from_secs(time));
+                }
             },
 
             Cue::Pause => {

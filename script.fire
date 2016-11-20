@@ -1,6 +1,69 @@
 # IRIS script for fireworks 2016-11-19
-say I R I S Initializing
-print IRIS Initialising...
+print ***************************************
+print * * * * * Welcome to I.R.I.S. * * * * *
+print * Intelligent Remote Ignition System  *
+print *  Copyright (c) 1994 Iris Labs Ltd.  *
+print ***************************************
+say Welcome to iris
+say
+print
+print
+print Boot sequence initiated.
+say boot sequence initiated
+say
+print Power supply status:
+say checking power supplies
+sleep 1
+print 48V...........OK
+sleep 1
+print 6V............OK
+sleep 1
+print 5V............OK
+sleep 1
+print 3.3V..........OK
+sleep 1
+print FIRING BUS....OK
+sleep 1
+print
+say power supplies OK
+say
+print
+print CMOS Checksum Error: Defaults loaded.
+print System time: 1970-01-01 00:00:08
+print
+sleep 1
+print
+print Establishing network link...
+say establishing network link
+say
+print ATM module...ERROR
+print IPX module...ERROR
+print IPv4 module...OK
+print
+say network link OK
+say
+print
+print Reading Configuration EEPROM...
+print
+sleep 1
+print
+print Event loaded:
+print ** Event Start Date: 2016-11-19
+print ** Event Start Time: 19:30 GMT
+print ** Event Location: 52.196428 NORTH, 0.104466 EAST
+print Geocoding event location...
+print ** Event Location: 1B KINGS RD, CAMBRIDGE, CB3 9DY
+print ** Event Catering: BYO
+print
+say event loaded OK
+say
+print
+print Firing Sequence loaded:
+print ** Firework channels configured: 90
+print ** Net Explosive Content: 3422.4g
+say firing sequence load OK
+print
+print
 
 board 1 d8:80:39:e0:7d:37
 board 2 d8:80:39:e0:81:a8
@@ -98,15 +161,20 @@ channel shot39                  3 29
 channel shot40                  3 30
 
 
-print Press any key to continue
+# ################################################################### ALPHA
+print Press enter key to continue
+say Please confirm sequence start
 pause
 say Beginning firing sequence alpha
+print Beginning firing sequence alpha
 
 # Begin with sparklers and two shot tubes:
 fire sparklers
 sleep 4
 fire shot1 shot2
 sleep 3
+
+say Sequence start successful
 
 # smallish fountains, finishing with mine
 fire lapis_lazuli1 lapis_lazuli2
@@ -120,9 +188,21 @@ sleep 1
 fire thunder_storm galactic
 sleep 20
 
+say Sequence ten per cent completion
+print Firing sequence alpha complete
 say Firing sequence alpha complete
+# ################################################################### BETA
+print Press enter key to continue
+say Please confirm beta sequence start
+pause
+print Press enter key to continue
+say Please confirm beta sequence start
+pause
+print p̳͌͌r̳͌͌e̳͌͌s̳͌͌s̳͌͌ e̳͌͌n̳͌͌t̳͌͌e̳͌͌r̳͌͌ k̳͌͌e̳͌͌y̳͌͌ t̳͌͌o̳͌͌ c̳͌͌o̳͌͌n̳͌͌t̳͌͌i̳͌͌n̳͌͌u̳͌͌e̳͌͌
+say Please confirm beta sequence start
 pause
 say Beginning firing sequence beta
+print Beginning firing sequence beta
 
 # Small fountain trident, small kimby battery
 fire dazzler orbit_boom1 orbit_boom2
@@ -136,6 +216,12 @@ sleep 30
 fire hi_5 5_star
 sleep 30
 
+say Continuity error detected, retrying sequence
+say
+sleep 5
+say Continuity error detected, advancing sequence
+say
+
 # wheel and 4 RCs together
 fire destiny
 sleep 10
@@ -144,6 +230,8 @@ sleep 30
 
 fire jellybeans
 sleep 45
+
+say Sequence advance successful, firing reserve channels
 
 # Potpurri of rubbish fountains:
 fire green_flare
@@ -155,30 +243,45 @@ sleep 5
 fire argon
 sleep 5
 
+sleep 10
+say Reserve channels depleted
+
 fire luminous_flux
 sleep 30
 
-say Firing sequence beta complete
-pause
+print Firing sequence beta complete
+say Firing sequence beta compleeeeeeeeete
+# ################################################################### GAMMA
+print Press enter key to continue
+say Please confirm mmmmm gamma sequence start
 say Beginning firing sequence gamma
+print Beginning firing sequence gamma
 
 # Rubbish fountains
 fire luna sonar silver_rain
 sleep 5
 
+say system status warning, input module fault
+
 fire mystic_pearls
 sleep 20
+
+say manual override disabled
 
 fire asteroid meteorite
 sleep 30
 fire bar_humbug green_envy citrine
 sleep 20
 
+say please contact a service technician
+
 fire yellow_pearl
 sleep 20
 
-say Firing sequence gamma complete
-pause
+say Firing seq gamma complete complete complete
+say master warning
+say master warning
+# ################################################################### DELTA
 say Beginning firing sequence delta
 
 fire go_stop_go calypso
@@ -195,8 +298,11 @@ fire delta_ray
 sleep 30
 
 say Firing sequence delta complete
-sleep 2
-say Beginning final sequence
+# ################################################################### FINAL
+say initiating emergency sequence
+say safety override disabled
+say manual override disabled
+say all overrides disabled
 
 fire beijing_blitz
 sleep 20
@@ -215,7 +321,15 @@ fire starlight1 starlight2
 sleep 35
 
 fire ruby_duby_do scarey_spiders
-sleep 30
+sleep 40
+
+say final shutdown sequence initiated
+say unexpected ite
+say warning warning
+say sequence corruption detectectecteced
+say bus voltage droppi
+say arming control authority lost
+say initiating immediate system shutdown
 
 fire lava_flow
 sleep 3
@@ -242,4 +356,4 @@ sleep 1
 fire shot35 shot36 shot37 shot38 shot39 shot40
 
 sleep 10
-say Sequence complete
+say system shut down complete
